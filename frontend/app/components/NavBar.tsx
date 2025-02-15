@@ -10,6 +10,7 @@ export default function NavBar() {
                 <div className="space-x-4">
                     <Link href="/" className="hover:underline">Creative Briefs</Link>
                     <Link href="/submit" className="hover:underline">Submit Content</Link>
+                    <Link href="/raw-data" className="hover:underline">Raw Data</Link>  {/* ✅ New Button */}
                 </div>
             </div>
         </nav>
