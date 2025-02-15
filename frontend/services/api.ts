@@ -4,8 +4,15 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5001/api";
 
 // Fetch briefs from backend
 export const fetchBriefs = async () => {
-    const res = await axios.get(`${API_URL}/briefs`);
-    return res.data;
+    try {
+        console.log(`Fetching from: ${API_URL}/briefs`);
+        const res = await axios.get(`${API_URL}/briefs`);
+        console.log("API Response:", res.data);
+        return res.data;
+    } catch (error) {
+        console.error("Error fetching briefs:", error);
+        throw error;
+    }
 };
 
 // Submit influencer content
