@@ -1,8 +1,10 @@
 import { Router } from "express";
-import { createSubmission } from "../controllers/submissionsController";
+import { processSubmission, upload } from "../controllers/submissionsController";
 
 const router = Router();
 
-router.post("/", createSubmission); // ✅ Pass the function directly
+router.post("/upload", upload.single("file"), async (req, res) => {
+    await processSubmission(req, res);
+});
 
 export default router;
