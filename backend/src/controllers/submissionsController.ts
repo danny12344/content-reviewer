@@ -25,7 +25,7 @@ const storage = multer.diskStorage({
 
 export const upload = multer({ storage });
 
-// ✅ Extract text from uploaded files
+// Extract text from uploaded files
 const extractTextFromFile = async (filePath: string, mimetype: string): Promise<string> => {
     try {
         if (mimetype === "text/plain") {
@@ -66,7 +66,7 @@ const fetchBriefContent = async (briefUrl: string): Promise<string> => {
     }
 };
 
-// ✅ Route handler for file upload & LLM processing
+// Route handler for file upload & LLM processing
 export const processSubmission = async (req: Request, res: Response) => {
     try {
         // Validate input
@@ -85,7 +85,6 @@ export const processSubmission = async (req: Request, res: Response) => {
         // Fetch cleaned brief content
         const briefContent = await fetchBriefContent(req.body.briefUrl);
 
-        // 🔥 Send to OpenAI for feedback
         let completion;
         try {
             completion = await openai.chat.completions.create({

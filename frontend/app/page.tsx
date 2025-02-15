@@ -15,7 +15,15 @@ export default function BriefsPage() {
     const [briefs, setBriefs] = useState<Brief[]>([]);
 
     useEffect(() => {
-        axios.get("http://localhost:5001/api/briefs")
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+        console.log("API URL:", apiUrl); // Debugging
+
+        if (!apiUrl) {
+            console.error("NEXT_PUBLIC_API_URL is undefined. Check your .env.local file.");
+            return;
+        }
+
+        axios.get(`${apiUrl}/briefs`) // Ensure the URL structure is correct
             .then(response => setBriefs(response.data))
             .catch(error => console.error("Error fetching briefs:", error));
     }, []);

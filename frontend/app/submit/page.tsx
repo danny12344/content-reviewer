@@ -18,7 +18,7 @@ export default function SubmitContentPage() {
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        axios.get("http://localhost:5001/api/briefs")
+        axios.get(`${process.env.NEXT_PUBLIC_API_URL}/briefs`)
             .then(response => setBriefs(response.data))
             .catch(error => console.error("Error fetching briefs:", error));
     }, []);

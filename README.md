@@ -22,3 +22,31 @@ npm run dev
 ```bash
 curl -X POST http://localhost:5001/api/upload -F "file=@/Users/dansimons/Downloads/six.pdf"
 ```
+
+
+## GCP deployment instructions:
+
+#### BE
+```bash
+gcloud builds submit --tag gcr.io/content-review-451017/content-reviewer-backend
+
+gcloud run deploy content-reviewer-backend \
+  --image gcr.io/content-review-451017/content-reviewer-backend \
+  --platform managed \
+  --region europe-west2 \
+  --allow-unauthenticated \
+  --port 5001
+```
+
+#### FE
+
+```bash
+gcloud builds submit --tag gcr.io/content-review-451017/content-reviewer-frontend
+
+gcloud run deploy content-reviewer-frontend \
+  --image gcr.io/content-review-451017/content-reviewer-frontend \
+  --platform managed \
+  --region europe-west2 \
+  --allow-unauthenticated \
+  --port 3000
+```

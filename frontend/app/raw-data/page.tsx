@@ -43,7 +43,7 @@ export default function RawDataPage() {
     const rowsPerPage = 10;
 
     useEffect(() => {
-        axios.get("http://localhost:5001/api/activity-csv")
+        axios.get(`${process.env.NEXT_PUBLIC_API_URL}/activity-csv`)
             .then(response => setData(response.data || []))
             .catch(error => {
                 console.error("Error fetching data:", error);
@@ -64,7 +64,7 @@ export default function RawDataPage() {
     const nextPage = () => setCurrentPage((prev) => Math.min(prev + 1, Math.ceil(filteredData.length / rowsPerPage)));
     const prevPage = () => setCurrentPage((prev) => Math.max(prev - 1, 1));
 
-    // ✅ Handle column resizing
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const handleResize = (column: string, event: any, size: any) => {
         setColumnWidths((prev) => ({
             ...prev,
