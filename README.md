@@ -18,3 +18,7 @@ cd backend
 npm install
 npm run dev
 ```
+
+```bash
+curl -X POST http://localhost:5001/api/upload -F "file=@/Users/dansimons/Downloads/six.pdf"
+```

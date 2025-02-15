@@ -24,5 +24,17 @@ export const submitContent = async (briefId: number, content: string) => {
 // Fetch feedback for a submission
 export const fetchFeedback = async (submissionId: number) => {
     const res = await axios.get(`${API_URL}/feedback/${submissionId}`);
+    return res.data;  
+};
+
+// Submit a file to the backend
+export const uploadFile = async (file: File) => {
+    const formData = new FormData();
+    formData.append("file", file);
+
+    const res = await axios.post(`${API_URL}/upload`, formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+    });
+
     return res.data;
 };
