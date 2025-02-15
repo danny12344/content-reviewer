@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import axios from "axios";
+import ReactMarkdown from "react-markdown";
 
 interface Brief {
     id: number;
@@ -60,13 +61,22 @@ export default function SubmitContentPage() {
             {/* File Upload */}
             <div className="mb-4">
                 <label className="block mb-2">Upload your script:</label>
-                <input type="file" accept=".txt,.pdf,.doc,.docx" onChange={handleFileChange} className="w-full p-2 bg-gray-700 text-white rounded" />
+                <input 
+                    type="file" 
+                    accept=".txt,.pdf,.doc,.docx" 
+                    onChange={handleFileChange} 
+                    className="w-full p-2 bg-gray-700 text-white rounded cursor-pointer" 
+                />
             </div>
 
             {/* Brief Selection */}
             <div className="mb-4">
                 <label className="block mb-2">Select a Brief:</label>
-                <select value={selectedBrief || ""} onChange={(e) => setSelectedBrief(e.target.value)} className="w-full p-2 bg-gray-700 text-white rounded">
+                <select 
+                    value={selectedBrief || ""} 
+                    onChange={(e) => setSelectedBrief(e.target.value)} 
+                    className="w-full p-2 bg-gray-700 text-white rounded"
+                >
                     <option value="">-- Select a Brief --</option>
                     {briefs.map((brief) => (
                         <option key={brief.id} value={brief.link}>{brief.title}</option>
@@ -75,7 +85,11 @@ export default function SubmitContentPage() {
             </div>
 
             {/* Submit Button */}
-            <button onClick={handleSubmit} className="w-full p-3 bg-blue-500 hover:bg-blue-600 text-white rounded">
+            <button 
+                onClick={handleSubmit} 
+                className="w-full p-3 bg-blue-500 hover:bg-blue-600 text-white rounded"
+                disabled={loading}
+            >
                 {loading ? "Processing..." : "Get Feedback"}
             </button>
 
@@ -83,7 +97,9 @@ export default function SubmitContentPage() {
             {feedback && (
                 <div className="mt-6 p-4 bg-gray-800 rounded-lg">
                     <h2 className="text-xl font-semibold mb-2">AI Feedback:</h2>
-                    <p className="text-gray-300">{feedback}</p>
+                    <div className="prose max-w-full text-white bg-gray-800 p-4 rounded-md">
+                        <ReactMarkdown>{feedback}</ReactMarkdown>
+                    </div>
                 </div>
             )}
         </div>

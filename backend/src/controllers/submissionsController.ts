@@ -90,7 +90,8 @@ export const processSubmission = async (req: Request, res: Response) => {
         try {
             completion = await openai.chat.completions.create({
                 model: "gpt-3.5-turbo",
-                max_tokens: 500,
+                max_tokens: 4000,
+                temperature: 0.7,
                 messages: [
                     { role: "system", content: "You are a marketing assistant giving feedback on video scripts." },
                     { role: "user", content: `I have this brief from a client:\n${briefContent}\n\nAnd this is my script:\n${extractedScript}\n\nGive me feedback on the script.` }
@@ -100,18 +101,22 @@ export const processSubmission = async (req: Request, res: Response) => {
             console.error("❌ OpenAI API Error (GPT-3.5 Turbo):", error.response ? error.response.data : error.message);
 
             try {
-                completion = await openai.completions.create({
-                    model: "gpt-3.5-turbo-instruct",
-                    max_tokens: 500,
-                    prompt: `I have this brief from a client:\n${briefContent}\n\nAnd this is my script:\n${extractedScript}\n\nGive me feedback on the script.`,
-                });
+                completion = await openai.chat.completions.create({
+                    model: "gpt-3.5-turbo", 
+                    max_tokens: 400,
+                    temperature: 0.7,
+                    messages: [
+                        { role: "system", content: "You are a marketing assistant giving feedback on video scripts. Format your response using markdown for better readability." },
+                        { role: "user", content: `I have this brief from a client:\n${briefContent}\n\nAnd this is my script:\n${extractedScript}\n\nGive me feedback on the script.` }
+                    ],
+                });                
             } catch (error: any) {
                 console.error("❌ OpenAI API Error (Backup Model):", error.response ? error.response.data : error.message);
                 return res.status(500).json({ error: "Failed to process submission.", details: error.response ? error.response.data : error.message });
             }
         }
 
-        const feedback = 'message' in completion.choices[0] ? completion.choices[0].message.content : completion.choices[0].text;
+        const feedback = completion.choices[0].message.content;
         console.log("✅ OpenAI Response:", feedback);
         res.json({ feedback });
 
