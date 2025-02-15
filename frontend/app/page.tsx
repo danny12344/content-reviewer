@@ -17,29 +17,13 @@ export default function Home() {
     }, []);
 
     return (
-        <div style={{ 
-            maxWidth: "600px", 
-            margin: "20px auto", 
-            fontFamily: "Arial, sans-serif", 
-            backgroundColor: "#121212", 
-            color: "#FFFFFF", 
-            padding: "20px", 
-            borderRadius: "8px" 
-        }}>
-            <h1 style={{ textAlign: "center", color: "#FFF" }}>Creative Briefs</h1>
-            <ul style={{ listStyleType: "none", padding: 0 }}>
+        <div className="max-w-lg mx-auto">
+            <h1 className="text-2xl font-bold text-center mb-4">Creative Briefs</h1>
+            <ul className="space-y-4">
                 {briefs.map((brief) => (
-                    <li key={brief.id} style={{ 
-                        border: "2px solid #FFF", 
-                        padding: "15px", 
-                        marginBottom: "10px", 
-                        borderRadius: "5px", 
-                        backgroundColor: "#222", 
-                        color: "#FFF", 
-                        fontWeight: "bold"
-                    }}>
-                        <h3>{brief.title}</h3>
-                        <p>{brief.description}</p>
+                    <li key={brief.id} className="border p-4 rounded-md bg-gray-700">
+                        <h3 className="text-lg font-semibold">{brief.title}</h3>
+                        <p className="text-gray-300">{brief.description}</p>
                     </li>
                 ))}
             </ul>
