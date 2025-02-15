@@ -1,0 +1,1 @@
+{"root":["./src/index.ts","./src/controllers/briefscontroller.ts","./src/controllers/feedbackcontroller.ts","./src/controllers/submissionscontroller.ts","./src/models/brief.ts","./src/models/feedback.ts","./src/models/submissions.ts","./src/routes/briefs.ts","./src/routes/feedback.ts","./src/routes/submissions.ts","./src/utils/csvparser.ts"],"version":"5.7.3"}
