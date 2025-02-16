@@ -27,8 +27,7 @@ The application consists of:
 
 ### Backend (Express & Node.js)
 - API for handling content submissions
-- AI integration for automated content review using OpenAI GPT
-- Cloud storage support for managing file uploads
+- AI integration for automated content review using OpenAI api
 
 ### Deployment & Infrastructure
 - Google Cloud Run for scalable backend hosting
@@ -47,7 +46,6 @@ The application consists of:
 - `processSubmission` function creates the promopt to submit to OpenAI and then does the actual api call and returns the response.
 - some challenges I faced here were generating a prompt that wasn't too large for the API call. Initially wihtou the `fetchBriefContent` and the use of cheerio library to extract actual text from the html pages the token limit was being hit as there was too much being submitted. The use of cheerio library resolved this.
 - Another challenge I faced was setting up the NEXT_PUBLIC_API_URL variable to dynamically use either localhost url for local dev & the backend's deployed url for when the app is deployed. Didn't end up having time to resolve this issue but with more time I'm sure it would be resolved. If this was a production ready application my plan would be to build a CI/CD pipeline using github actions that would feed in the API URLs dynamically as the app was being built.
-
 
 
 ### If I had more time
