@@ -2,6 +2,7 @@
 
 
 Next.js / express app hosted on Google Cloud Run. Avaible at this url:
+(please note since minscale=0 it might take a while to load on initial viewing (up to 30 seconds))
 
 https://content-reviewer-frontend-91734819578.europe-west2.run.app
 
