@@ -48,5 +48,5 @@ gcloud run deploy content-reviewer-frontend \
   --platform managed \
   --region europe-west2 \
   --allow-unauthenticated \
-  --port 3000
+  --set-env-vars NEXT_PUBLIC_API_URL=https://content-reviewer-backend-91734819578.europe-west2.run.app
 ```

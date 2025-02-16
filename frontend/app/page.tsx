@@ -23,7 +23,7 @@ export default function BriefsPage() {
             return;
         }
 
-        axios.get(`${apiUrl}/briefs`) // Ensure the URL structure is correct
+        axios.get(`${apiUrl}/api/briefs`) // Ensure the URL structure is correct
             .then(response => setBriefs(response.data))
             .catch(error => console.error("Error fetching briefs:", error));
     }, []);
