@@ -51,7 +51,7 @@ The application consists of:
 ### If I had more time
 - I would have setup a postgresql database to store the data in a more secure better way - I understand that the way I'm storing data is not ideal at all right now. However, I chose to focus my efforts more on FE / BE features & getting the app deployed. 
 - I would also enable file uploads to be stored in GCS buckets rather than in the backend cloud run instance directly which I also know is not great. 
-- Added more file upload formats so the AI feedback could provide feedback on videos and images
+- Added support for more file upload formats so the AI feedback could provide feedback on videos and images
 - Created better security e.g. at the moment CORS setup is quite insecure and the frontend commmuncaites with the backned cloud run instance over an insecure connection
 - I would also work on the UI to improve aesthetics & mobile compatability - it works ok on mobile however, the nav bar does not look great
 
