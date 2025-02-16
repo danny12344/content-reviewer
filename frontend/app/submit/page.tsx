@@ -10,6 +10,8 @@ interface Brief {
     link: string;
 }
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL?.trim();
+
 export default function SubmitContentPage() {
     const [briefs, setBriefs] = useState<Brief[]>([]);
     const [selectedBrief, setSelectedBrief] = useState<string | null>(null);
@@ -18,7 +20,8 @@ export default function SubmitContentPage() {
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        axios.get("http://localhost:5001/api/briefs")
+        console.log(`Fetching from API: ${API_URL}/api/briefs`); // Debugging
+        axios.get(`${API_URL}/api/briefs`)
             .then(response => setBriefs(response.data))
             .catch(error => console.error("Error fetching briefs:", error));
     }, []);
@@ -41,7 +44,8 @@ export default function SubmitContentPage() {
 
         setLoading(true);
         try {
-            const response = await axios.post("http://localhost:5001/api/submissions/upload", formData, {
+            console.log(`Submitting file to: ${API_URL}/api/submissions/upload`); // Debugging
+            const response = await axios.post(`${API_URL}/api/submissions/upload`, formData, {
                 headers: { "Content-Type": "multipart/form-data" },
             });
 

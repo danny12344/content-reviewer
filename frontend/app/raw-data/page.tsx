@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Resizable } from "react-resizable"; // ✅ Import resizable component
-import "react-resizable/css/styles.css"; // ✅ Import default styles
+import { Resizable } from "react-resizable"; 
+import "react-resizable/css/styles.css";
 
 interface ActivityData {
     id: number;
@@ -20,7 +20,8 @@ interface ActivityData {
     feedback: string;
 }
 
-// ✅ Initial column sizes
+const API_URL = process.env.NEXT_PUBLIC_API_URL?.trim();
+
 const initialColumnWidths: { [key: string]: number } = {
     id: 80,
     createdAt: 200,
@@ -43,7 +44,7 @@ export default function RawDataPage() {
     const rowsPerPage = 10;
 
     useEffect(() => {
-        axios.get("http://localhost:5001/api/activity-csv")
+        axios.get(`${API_URL}/api/activity-csv`)
             .then(response => setData(response.data || []))
             .catch(error => {
                 console.error("Error fetching data:", error);
@@ -64,7 +65,7 @@ export default function RawDataPage() {
     const nextPage = () => setCurrentPage((prev) => Math.min(prev + 1, Math.ceil(filteredData.length / rowsPerPage)));
     const prevPage = () => setCurrentPage((prev) => Math.max(prev - 1, 1));
 
-    // ✅ Handle column resizing
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const handleResize = (column: string, event: any, size: any) => {
         setColumnWidths((prev) => ({
             ...prev,
@@ -163,14 +164,13 @@ export default function RawDataPage() {
     );
 }
 
-/** ✅ Expandable Text Component */
 function ExpandableText({ text }: { text: string }) {
     const [expanded, setExpanded] = useState(false);
 
     return (
         <div>
             <span className="cursor-pointer text-blue-400" onClick={() => setExpanded(!expanded)}>
-                {expanded ? text : text.slice(0, 50) + "..."} {/* ✅ Show only 50 chars unless expanded */}
+                {expanded ? text : text.slice(0, 50) + "..."} {/* Show only 50 chars unless expanded */}
             </span>
         </div>
     );
