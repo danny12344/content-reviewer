@@ -1,7 +1,7 @@
 # Brand Content Reviewer App
 
 
-Next.js / express app hosted on Google Cloud Run. Avaible at this url:
+Next.js / express app hosted on Google Cloud Run. Available at this url:
 (please note since minscale=0 it might take a while to load on initial viewing (up to 30 seconds))
 
 https://content-reviewer-frontend-91734819578.europe-west2.run.app
@@ -43,8 +43,8 @@ The application consists of:
 - Then created the page to display the activity data from past campaigns
   - to clean the data I created `backend/src/scripts/cleanCSV.ts` script that I ran in my terminal to generate a cleaned CSV. This script removes duplicates & ensures each id was unique, trimmed whitespace from text filed, ensured all boolean fields were formatted correctly, converted the stageId values to integers and formatted headers correctly
 - To create the feedback bot I first setup the OpenAI api call in `backend/src/controllers/submissionsController.ts` file which extracts text from the uploaded file which can be plain text, pdf or word document. The `fetchBriefContent` extracts text from the HTML pages from the links to the notion page. 
-- `processSubmission` function creates the promopt to submit to OpenAI and then does the actual api call and returns the response.
-- some challenges I faced here were generating a prompt that wasn't too large for the API call. Initially wihtou the `fetchBriefContent` and the use of cheerio library to extract actual text from the html pages the token limit was being hit as there was too much being submitted. The use of cheerio library resolved this.
+- `processSubmission` function creates the prompt to submit to OpenAI and then does the actual api call and returns the response.
+- some challenges I faced here were generating a prompt that wasn't too large for the API call. Initially without the `fetchBriefContent` and the use of cheerio library to extract actual text from the html pages the token limit was being hit as there was too much being submitted. The use of cheerio library resolved this.
 - Another challenge I faced was setting up the NEXT_PUBLIC_API_URL variable to dynamically use either localhost url for local dev & the backend's deployed url for when the app is deployed. Didn't end up having time to resolve this issue but with more time I'm sure it would be resolved. If this was a production ready application my plan would be to build a CI/CD pipeline using github actions that would feed in the API URLs dynamically as the app was being built.
 
 
@@ -52,7 +52,7 @@ The application consists of:
 - I would have setup a postgresql database to store the data in a more secure better way - I understand that the way I'm storing data is not ideal at all right now. However, I chose to focus my efforts more on FE / BE features & getting the app deployed. 
 - I would also enable file uploads to be stored in GCS buckets rather than in the backend cloud run instance directly which I also know is not great. 
 - Added support for more file upload formats so the AI feedback could provide feedback on videos and images
-- Created better security e.g. at the moment CORS setup is quite insecure and the frontend commmuncaites with the backned cloud run instance over an insecure connection
+- Created better security e.g. at the moment CORS setup is quite insecure and the frontend communicates with the backend cloud run instance over an insecure connection
 - I would also work on the UI to improve aesthetics & mobile compatability - it works ok on mobile however, the nav bar does not look great
 
 Thanks for taking the time to review my work :) please let me know if you have any questions!
